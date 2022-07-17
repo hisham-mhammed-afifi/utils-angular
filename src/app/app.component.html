@@ -1,0 +1,87 @@
+<div class="container mt-5">
+  <router-outlet></router-outlet>
+  <button
+    type="button"
+    class="btn btn-primary mx-2"
+    (click)="openModal($event, 'my-modal')"
+  >
+    open modal
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary me-2"
+    (click)="openModal($event, 'another')"
+  >
+    open another
+  </button>
+  <button
+    type="button"
+    class="btn btn-danger me-2"
+    (click)="
+      openDeleteModal({
+        name: 'Hesham',
+        description: 'Hesham mohammed abd elshafouk'
+      })
+    "
+  >
+    Delete
+  </button>
+  <app-my-modal></app-my-modal>
+
+  <app-modal modalID="another">
+    <ng-container modal-title>Hello from my modal</ng-container>
+    <h3>Another Modal</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed architecto
+      debitis, cum tempore omnis velit dolorum placeat? Laborum voluptatibus
+      minus eius dolor, doloremque labore necessitatibus dolores beatae, impedit
+      itaque hic minima qui laudantium cumque non illo nihil reprehenderit
+      dolorum tempora saepe eaque distinctio aliquid accusamus! Laborum tenetur
+      iusto hic nesciunt!
+    </p>
+    <ng-container modal-actions>
+      <button type="button" class="btn btn-success">Save</button>
+    </ng-container>
+  </app-modal>
+
+  <!-- another type of modal -->
+
+  <ng-container *ngIf="showModal">
+    <div class="modal fade show" (click)="closeModal()" tabindex="-1">
+      <div
+        class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down modal-dialog-scrollable"
+      >
+        <div class="modal-content" (click)="$event.stopImmediatePropagation()">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete {{ itemToDelete.name }}</h5>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="closeModal()"
+            ></button>
+          </div>
+          <div class="modal-body">
+            {{ itemToDelete.description }}
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="closeModal()"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              (click)="closeModal()"
+            >
+              Delete
+            </button>
+            <ng-content select="[modal-actions]"></ng-content>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

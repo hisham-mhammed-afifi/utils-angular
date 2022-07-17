@@ -1,0 +1,32 @@
+<div
+  class="modal fade"
+  [class.show]="modal.isModalOpen(modalID)"
+  (click)="closeModal()"
+  tabindex="-1"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down modal-dialog-scrollable"
+  >
+    <div class="modal-content" (click)="$event.stopImmediatePropagation()">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <ng-content select="[modal-title]"></ng-content>
+        </h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="closeModal()"
+        >
+          Cancel
+        </button>
+        <ng-content select="[modal-actions]"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
